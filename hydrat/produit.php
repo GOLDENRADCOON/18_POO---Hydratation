@@ -79,13 +79,17 @@ class Produit {
         $this->couleur = $couleur;
     }
 
-    public function hydrate($donnees)
+    public function hydrate(array $donnees)
     {
         foreach ($donnees as $key => $value) {
+
+            //Ici, je remplace les underscore
+            $key = preg_replace("_","",$key);
+
             $method = "set".ucfirst($key);
             
             if (method_exists($this, $method)){
-                
+                $this->setId($value);
             }
         }
     }
