@@ -27,7 +27,7 @@ class BddManager {
         ));
         $produits = $request->fetchAll(PDO::FETCH_ASSOC);
 
-        return new Produit($produits);
+        return new Produit($produits[0]);
     }
 
 

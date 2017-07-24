@@ -8,88 +8,95 @@ class Produit {
     protected $_prix;
     protected $_couleur;
 
+    public function __CONSTRUCT($donnees = array()){
+        $this->hydrate($donnees);
+    }
+
     /**
      * @return mixed
      */
     public function getId()
     {
-        return $this->id;
+        return $this->_id;
     }
     /**
      * @param mixed $id
      */
     public function setId($id)
     {
-        $this->id = $id;
+        $this->_id = $id;
     }
     /**
      * @return mixed
      */
     public function getNom()
     {
-        return $this->nom;
+        return $this->_nom;
     }
     /**
      * @param mixed $nom
      */
     public function setNom($nom)
     {
-        $this->nom = $nom;
+        $this->_nom = $nom;
     }
     /**
      * @return mixed
      */
     public function getDescription()
     {
-        return $this->description;
+        return $this->_description;
     }
     /**
      * @param mixed $description
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $this->_description = $description;
     }
     /**
      * @return mixed
      */
     public function getPrix()
     {
-        return $this->prix;
+        return $this->_prix;
     }
     /**
      * @param mixed $prix
      */
     public function setPrix($prix)
     {
-        $this->prix = $prix;
+        $this->_prix = $prix;
     }
-    /**
-     * @return mixed
-     */
+
+
+
+
     public function getCouleur()
     {
-        return $this->couleur;
+        return $this->_couleur;
     }
-    /**
-     * @param mixed $couleur
-     */
+
     public function setCouleur($couleur)
     {
-        $this->couleur = $couleur;
+        $this->_couleur = $couleur;
     }
+
+
+
+
 
     public function hydrate(array $donnees)
     {
         foreach ($donnees as $key => $value) {
 
             //Ici, je remplace les underscore
-            $key = preg_replace("_","",$key);
+            $key = preg_replace("#_#", "", $key);
 
             $method = "set".ucfirst($key);
             
             if (method_exists($this, $method)){
-                $this->setId($value);
+                $this->$method($value);
             }
         }
     }
